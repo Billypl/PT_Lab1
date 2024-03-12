@@ -2,18 +2,18 @@ package org.example;
 
 import java.util.*;
 
-public class SetFactory {
-
+public class MapFactory
+{
     static final  String NO_SORTING = "none";
     static final  String DEFAULT_SORT = "sort";
     static final  String ALTERNATIVE_SORT = "alt";
 
-    public static Set<Mage> createSet(String sortingType)
+    public static  Map<Mage, Integer> createMap(String sortingType)
     {
-        Set<Mage> mags;
+        Map<Mage, Integer> mags;
         if (sortingType.equals(DEFAULT_SORT))
         {
-            mags = new TreeSet<>();
+            mags = new TreeMap<>();
         }
         else if(sortingType.equals(ALTERNATIVE_SORT))
         {
@@ -22,13 +22,14 @@ public class SetFactory {
                     MageCompare.MageField.Name,
                     MageCompare.MageField.Power
             )));
-            mags = new TreeSet<>(mageCompare);
+            mags = new TreeMap<>(mageCompare);
         }
         else
         {
-            mags = new HashSet<>();
+            mags = new HashMap<>();
         }
 
         return mags;
     }
+
 }

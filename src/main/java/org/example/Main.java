@@ -9,7 +9,7 @@ public class Main {
     private static ArrayList<Mage> createTestData()
     {
         Mage m1 = new Mage("Andrzej", 11, 4.20);
-        Mage m2 = new Mage("Malwem", 22, 6.9);
+        Mage m2 = new Mage("Malwem", 11, 6.9);
         Mage m3 = new Mage("Bartek", 33, 2);
         Mage m4 = new Mage("Billy", 44, 21.37);
         Mage m5 = new Mage("Uszatek", 99, 22.5);
@@ -32,9 +32,9 @@ public class Main {
         return mTmp;
     }
 
-    private static Map<Mage, Integer> createMap(Set<Mage> mags)
+    private static Map<Mage, Integer> createMap(Set<Mage> mags, String sortType)
     {
-        Map<Mage, Integer> mageMap = new HashMap<>();
+        Map<Mage, Integer> mageMap = MapFactory.createMap(sortType);
         for(Mage m : mags)
         {
             mageMap.put(m, calculateApprentices(m.getApprentices()));
@@ -60,7 +60,7 @@ public class Main {
 //            System.out.println("Brak argumentów wejściowych");
 //            return;
 //        }
-        String sortType = "sort";
+        String sortType = "alt";
         Mage.sortType = sortType;
 
         Set<Mage> mags = SetFactory.createSet(sortType);
@@ -68,7 +68,7 @@ public class Main {
         MagePresenter magePresenter = new MagePresenter(mags);
         magePresenter.printMagsTree();
 
-        for(Map.Entry<Mage, Integer> e : createMap(mags).entrySet())
+        for(Map.Entry<Mage, Integer> e : createMap(mags, sortType).entrySet())
         {
             System.out.println(e.getKey().toString() + " | NUMBER: " + e.getValue());
         }

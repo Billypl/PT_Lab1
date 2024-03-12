@@ -1,8 +1,6 @@
 package org.example;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 public class MagePresenter {
@@ -16,7 +14,7 @@ public class MagePresenter {
     }
     public void printMagsTree()
     {
-        ArrayList<Mage> masters = new ArrayList<Mage>(mags);
+        ArrayList<Mage> masters = new ArrayList<>(mags);
         masters.removeAll(findApprentices());
         for(Mage m : masters)
         {
@@ -33,8 +31,6 @@ public class MagePresenter {
         }
         depthIndicator = depthIndicator.substring(0, depthIndicator.length() - 1);
     }
-
-
 
     private ArrayList<Mage> findApprentices()
     {
