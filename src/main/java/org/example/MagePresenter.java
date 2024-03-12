@@ -7,51 +7,44 @@ public class MagePresenter {
 
     private final Set<Mage> mags;
     private String depthIndicator;
-    public MagePresenter(Set<Mage> mags)
-    {
+
+    public MagePresenter(Set<Mage> mags) {
         this.mags = mags;
         this.depthIndicator = "";
     }
-    public void printMagsTree()
-    {
+
+    public void printMagsTree() {
         ArrayList<Mage> masters = new ArrayList<>(mags);
         masters.removeAll(findApprentices());
-        for(Mage m : masters)
-        {
+        for (Mage m : masters) {
             printMagsTreeHelper(m);
         }
     }
-    private void printMagsTreeHelper(Mage mage)
-    {
+
+    private void printMagsTreeHelper(Mage mage) {
         depthIndicator = depthIndicator.concat("-");
         System.out.println(depthIndicator + mage.toString());
-        for(Mage m : mage.getApprentices())
-        {
+        for (Mage m : mage.getApprentices()) {
             printMagsTreeHelper(m);
         }
         depthIndicator = depthIndicator.substring(0, depthIndicator.length() - 1);
     }
 
-    private ArrayList<Mage> findApprentices()
-    {
+    private ArrayList<Mage> findApprentices() {
         ArrayList<Mage> apprentices = new ArrayList<>();
-        for(Mage m : mags)
-        {
+        for (Mage m : mags) {
             findApprenticesHelper(m, apprentices);
         }
         return apprentices;
     }
-    private void findApprenticesHelper(Mage mage, ArrayList<Mage> apprentices)
-    {
-        if(apprentices.contains(mage))
-        {
+
+    private void findApprenticesHelper(Mage mage, ArrayList<Mage> apprentices) {
+        if (apprentices.contains(mage)) {
             return;
         }
 
-        for(Mage m : mage.getApprentices())
-        {
-            if(!m.getApprentices().isEmpty())
-            {
+        for (Mage m : mage.getApprentices()) {
+            if (!m.getApprentices().isEmpty()) {
                 findApprenticesHelper(m, apprentices);
             }
             apprentices.add(m);

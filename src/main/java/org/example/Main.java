@@ -4,10 +4,7 @@ import java.util.*;
 
 
 public class Main {
-
-
-    private static ArrayList<Mage> createTestData()
-    {
+    private static ArrayList<Mage> createTestData() {
         Mage m1 = new Mage("Andrzej", 11, 4.20);
         Mage m2 = new Mage("Malwem", 11, 6.9);
         Mage m3 = new Mage("Bartek", 33, 2);
@@ -18,7 +15,7 @@ public class Main {
         Mage m8 = new Mage("Ojczysty", 88, 1.2);
         Mage m9 = new Mage("Marcin", 66, 15);
         Mage m10 = new Mage("Domino", 55, 1410);
-        ArrayList<Mage> mTmp = new ArrayList<>(List.of(m1,m2,m3,m4,m5,m6,m7,m8,m9,m10));
+        ArrayList<Mage> mTmp = new ArrayList<>(List.of(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10));
 
         m7.getApprentices().add(m8);
         m7.getApprentices().add(m9);
@@ -32,21 +29,17 @@ public class Main {
         return mTmp;
     }
 
-    private static Map<Mage, Integer> createMap(Set<Mage> mags, String sortType)
-    {
+    private static Map<Mage, Integer> createMap(Set<Mage> mags, String sortType) {
         Map<Mage, Integer> mageMap = MapFactory.createMap(sortType);
-        for(Mage m : mags)
-        {
+        for (Mage m : mags) {
             mageMap.put(m, calculateApprentices(m.getApprentices()));
         }
         return mageMap;
     }
 
-    private static Integer calculateApprentices(Set<Mage> mags)
-    {
+    private static Integer calculateApprentices(Set<Mage> mags) {
         int apprenticesCounter = 0;
-        for(Mage m : mags)
-        {
+        for (Mage m : mags) {
             apprenticesCounter += calculateApprentices(m.getApprentices());
             apprenticesCounter++;
         }
@@ -54,7 +47,6 @@ public class Main {
     }
 
     public static void main(String[] args) {
-
 //        if(args.length == 0)
 //        {
 //            System.out.println("Brak argumentów wejściowych");
@@ -68,8 +60,7 @@ public class Main {
         MagePresenter magePresenter = new MagePresenter(mags);
         magePresenter.printMagsTree();
 
-        for(Map.Entry<Mage, Integer> e : createMap(mags, sortType).entrySet())
-        {
+        for (Map.Entry<Mage, Integer> e : createMap(mags, sortType).entrySet()) {
             System.out.println(e.getKey().toString() + " | NUMBER: " + e.getValue());
         }
     }
